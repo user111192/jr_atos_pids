@@ -26,7 +26,6 @@ function render(ctx, state, pids) {
         .size(pids.width, pids.height)
         .draw(ctx);
 
-    let configFilePath = pids.getCustomMessage(0);
     if (SCRIPT_INPUT.preset_id == "") {
         Text.create("Error text").text("未设置配置文件路径，无法渲染。").scale(1.25).size(pids.width - (5 * 2), 9).scaleXY().pos(5, HEADER_HEIGHT).draw(ctx);
         return;
