@@ -1,0 +1,15 @@
+{
+    "pids_images": [
+        {
+            "id": "jre_atos_pids_test",
+            "name": "JRE ATOS-Style PIDS (test)",
+            "scriptTexts": [],
+            "scriptFiles": [
+                "jsblock:scripts/jre_atos/main.js"
+            ],
+            "scriptInput": {
+                "preset_id": "test"
+            }
+        }
+    ]
+}
