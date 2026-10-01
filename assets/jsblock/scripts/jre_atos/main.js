@@ -1,23 +1,27 @@
 include(Resources.id("jsblock:scripts/pids_util.js")); // Built-in script shipped with JCM
+importPackage(java.awt);
 const THEADER_HEIGHT = 13;
-const HEADER_HEIGHT = THEADER_HEIGHT + 2;
+const RHEADER_HEIGHT = THEADER_HEIGHT + 1;
+const HEADER_HEIGHT = RHEADER_HEIGHT + 1;
 
 function create(ctx, state, pids) {
     state.tex = new GraphicsTexture(pids.width, pids.height);
 
     let g = state.tex.graphics;
-    g.setColor(Color(0, 6, 102));
+    g.setColor(Color(102 / 255.0, 102 / 255.0, 102 / 255.0));
     g.fillRect(0, 0, pids.width, pids.height);
-    g.setColor(Color(0, 3, 51));
+    g.setColor(Color(51 / 255.0, 51 / 255.0, 51 / 255.0));
     g.fillRect(2, THEADER_HEIGHT, pids.width - (2 * 2), pids.height - THEADER_HEIGHT - 2);
-    g.setColor(Color(0, 0, 0));
-    g.fillRect(5, HEADER_HEIGHT, pids.width - (5 * 2), pids.height - HEADER_HEIGHT - 2);
+    g.setColor(Color(0 / 255.0, 0 / 255.0, 0 / 255.0));
+    g.fillRect(5, RHEADER_HEIGHT, pids.width - (5 * 2), pids.height - RHEADER_HEIGHT - 2);
 
     state.tex.upload();
 
     state.AVAILABLE_WIDTH = Math.floor((pids.width - (5 * 2)) / 9 * 2) / 2;
+    state.AVAILABLE_HEIGHT = Math.floor((pids.height - HEADER_HEIGHT) / (10));
 
     print("Available width: " + state.AVAILABLE_WIDTH);
+    print("Available height: " + state.AVAILABLE_HEIGHT);
 }
 
 function render(ctx, state, pids) {
@@ -27,11 +31,13 @@ function render(ctx, state, pids) {
         .draw(ctx);
 
     if (SCRIPT_INPUT.preset_id == "") {
-        Text.create("Error text").text("未设置配置文件路径，无法渲染。").scale(1.25).size(pids.width - (5 * 2), 9).scaleXY().pos(5, HEADER_HEIGHT).draw(ctx);
+        Text.create("Error text").text("未设置配置文件路径，无法渲染。").scale(1.25).color(0xFF8000).size(pids.width - (5 * 2), 9).scaleXY().pos(5, HEADER_HEIGHT).draw(ctx);
         return;
     }
+    
+    Text.create("Test").text("Hello world! 1234567890").scale(1.25).size(pids.width - (5 * 2), 9).scaleXY().color(0xFF8000).pos(5, HEADER_HEIGHT).draw(ctx);
+    Text.create("Test2").text("Hello world! 1234567890").scale(1.25).size(pids.width - (5 * 2), 9).scaleXY().color(0xFF8000).pos(5, HEADER_HEIGHT+10).draw(ctx);
 
-    Text.create("Test").text("Hello world! 1234567890").scale(1.25).size(pids.width - (5 * 2), 9).scaleXY().pos(5, HEADER_HEIGHT).draw(ctx);
 
     // Arrivals
     // for (let i = 0; i < pids.rows; i++) {
